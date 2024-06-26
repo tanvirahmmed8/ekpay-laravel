@@ -195,9 +195,17 @@ class EkpayPaymentController extends Controller
                     'trx' => $postData['tran_id']
                 );
             } else {
+                $msg = "";
+                if (!empty($response->responseMessage)) {
+                    $msg = $response->responseMessage;
+                }
+                if (!empty($response->msg_det)) {
+                    $msg = $response->msg_det;
+                }
+
                 $output = array(
                     'status' => 0,
-                    'message' => $response->responseMessage,
+                    'message' =>  $msg,
                 );
             }
         }
